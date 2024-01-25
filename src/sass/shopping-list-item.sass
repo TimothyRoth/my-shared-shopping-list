@@ -1,0 +1,39 @@
+.shopping-list-item
+  padding: 10px
+  display: flex
+  align-items: center
+  gap: 10px
+  position: relative
+  overflow: hidden
+  transition: all 0.3s ease-in-out
+  .show-popup
+    display: flex
+    flex-direction: column
+    cursor: pointer
+    .last-time-changed-date
+      font-size: 12px
+  .delete-item
+    display: none
+  .check-item
+    transition: all 0.3s ease-in-out
+    cursor: pointer
+    width: 24px
+    height: 24px
+    img
+      width: 100%
+      height: auto
+  &.checked
+    transition: all 0.3s ease-in-out
+    background-color: rgba(0, 0, 0, 0.1)
+    border-radius: 20px
+    .check-item
+      transition: all 0.3s ease-in-out
+      background: $tertiary-color
+      border-radius: 100%
+    .delete-item
+      display: block
+      margin-left: auto
+      img
+        width: 15px
+        height: auto
+        cursor: pointer

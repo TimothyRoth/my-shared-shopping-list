@@ -1,0 +1,45 @@
+.add-item-row
+  display: flex
+  position: relative
+  gap: 20px
+
+  #add-item
+    font-size: 1rem
+    padding: 10px 20px
+    width: 100%
+    border: 2px solid $tertiary-color
+    background: $primary-color
+    border-radius: 18px
+    color: $tertiary-color
+    font-family: $font-family
+    font-weight: 500
+    transition: .3s ease-in-out
+    box-shadow: $box-shadow-light
+
+    &:hover
+      transition: .3s ease-in-out
+      background: $tertiary-color
+      color: $primary-color
+
+    &::placeholder
+      font-weight: 500
+      opacity: 1
+      font-family: $font-family
+
+    &:focus, &:active
+      outline: none
+
+  #add-item-button
+    box-shadow: $box-shadow-light
+    font-size: 1.5rem
+    border: 2px solid $tertiary-color
+    padding: 2px 14px
+    font-weight: 500
+    border-radius: 100%
+    cursor: pointer
+    transition: .3s ease-in-out
+
+    &:hover
+      transition: .3s ease-in-out
+      background: $tertiary-color
+      color: $primary-color

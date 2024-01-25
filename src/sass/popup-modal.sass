@@ -1,0 +1,51 @@
+.mssl-wrapper
+  .item-meta-data
+    position: fixed
+    height: 100vh
+    width: 100vw
+    background: rgba(0, 0, 0, 0.7)
+    z-index: -1
+    left: 0
+    top: 0
+    opacity: 0
+    transition: all 0.3s ease-in-out
+    &.show
+      transition: all 0.3s ease-in-out
+      z-index: 1
+      opacity: 1
+    .close-popup
+      position: absolute
+      cursor: pointer
+      z-index: 2
+      right: 20px
+      top: 20px
+      font-weight: 700
+      font-size: 1.2em
+      width: 30px
+      img
+        width: 100%
+        height: auto
+    .inner-content
+      padding: 250px 30px 30px
+      display: flex
+      flex-direction: column
+      gap: 20px
+      position: relative
+      max-width: 620px
+      left: 50%
+      transform: translateX(-50%)
+      .update-description
+        min-height: 200px
+      .update-title, .update-description
+        width: 100%
+        border: none
+        background: transparent
+        color: $tertiary-color
+        font-size: 1.5rem
+        &:focus, &:active
+          outline: none
+        &::placeholder
+          color: $tertiary-color
+          font-family: $font-family
+          opacity: 1
+          font-size: 1.5rem
