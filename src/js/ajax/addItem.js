@@ -27,7 +27,6 @@ const addItem = title => {
             if (data.status === 'success') {
                 renderShoppingList();
             }
-
         }, complete: function () {
             // Hide loader or loading state if needed
         }

@@ -1,5 +1,11 @@
 <?php
 
+use app\MSSL_Installation;
+use app\MSSL_CptShoppingList;
+use app\MSSL_CptArticleLib;
+use app\MSSL_Ajax;
+use app\MSSL_Shortcodes;
+
 /**
  * Plugin Name: shared shopping list for WordPress
  * Plugin URI: www.timothy-roth.de
@@ -29,11 +35,11 @@ spl_autoload_register(static function ($class_name) {
 
 // Initialize instances of app
 $instances = [
-    'app\MSSL_Installation',
-    'app\MSSL_CptShoppingList',
-    'app\MSSL_CptArticleLib',
-    'app\MSSL_Ajax',
-    'app\MSSL_Shortcodes',
+    MSSL_Installation::class,
+    MSSL_CptShoppingList::class,
+    MSSL_CptArticleLib::class,
+    MSSL_Ajax::class,
+    MSSL_Shortcodes::class,
 ];
 
 foreach ($instances as $instance_name) {

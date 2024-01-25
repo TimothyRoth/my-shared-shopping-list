@@ -15,9 +15,7 @@ const initLoadArticleSuggestions = () => {
     }, 300));
 
     jQuery('body').on('click', function (e) {
-        e.preventDefault();
 
-        console.log(e.target)
         if (e.target === searchBar[0]) {
             const search = jQuery(this).val();
             articleSuggestionWrapper.addClass('show');
@@ -25,14 +23,21 @@ const initLoadArticleSuggestions = () => {
             return 0;
         }
 
-        articleSuggestionWrapper.removeClass('show');
+        const isDeleteButton = jQuery(e.target).hasClass('delete-article-from-list');
+
+        if(e.target !== searchBar[0] && !isDeleteButton) {
+            articleSuggestionWrapper.removeClass('show');
+        }
+
     });
 
     jQuery('body').on('click', '.single-article-suggestion', function (e) {
         e.preventDefault();
-        const item = jQuery(this).html();
+        if (e.target === jQuery(this).find('.delete-article-from-list')[0]) return 0;
+        const item = jQuery(this).find('.list-item-title').html();
         addItem(item);
     });
+
 }
 
 const articleSuggestions = search => {
@@ -51,6 +56,7 @@ const articleSuggestions = search => {
 }
 
 module.exports = {
-    initLoadArticleSuggestions
+    initLoadArticleSuggestions,
+    articleSuggestions
 }
 

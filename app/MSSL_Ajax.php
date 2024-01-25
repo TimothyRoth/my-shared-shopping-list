@@ -177,8 +177,6 @@ class MSSL_Ajax
      */
     public function MSSL_delete_item(): void
     {
-        $response = [];
-
         $itemID = $_POST['item'];
         $title = get_the_title($itemID);
         $delete_success = wp_delete_post($itemID, true);
