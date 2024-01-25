@@ -18,6 +18,9 @@ class MSSL_Ajax
         add_action('wp_ajax_MSSL_delete_item', [$this, 'MSSL_delete_item']);
         add_action('wp_ajax_nopriv_MSSL_delete_item', [$this, 'MSSL_delete_item']);
 
+        add_action('wp_ajax_MSSL_delete_items', [$this, 'MSSL_delete_items']);
+        add_action('wp_ajax_nopriv_MSSL_delete_items', [$this, 'MSSL_delete_items']);
+
         add_action('wp_ajax_MSSL_render_shopping_list', [$this, 'MSSL_render_shopping_list']);
         add_action('wp_ajax_nopriv_MSSL_render_shopping_list', [$this, 'MSSL_render_shopping_list']);
 
@@ -198,6 +201,26 @@ class MSSL_Ajax
     /**
      * @throws JsonException
      */
+    public function MSSL_delete_items(): void
+    {
+        $itemID = $_POST['items'];
+
+        foreach ($itemID as $id) {
+            wp_delete_post($id, true);
+        }
+
+        $response = [
+            'status' => 'success',
+            'message' => "Du hast die ausgewählten Artikel erfolgreich von der Einkaufsliste entfernt."
+        ];
+
+        $this->return_json($response);
+    }
+
+
+    /**
+     * @throws JsonException
+     */
     public function MSSL_render_shopping_list(): void
     {
         $shopping_list = new CptShoppingList();
@@ -221,6 +244,8 @@ class MSSL_Ajax
             $article_lib->synchronize_article_database($title);
 
             $status = get_post_meta($id, $shopping_list->Cpt_ListItemStatus, true);
+
+
             $description = wp_strip_all_tags($p->post_content) ?? '';
             $thumbnail = get_the_post_thumbnail_url($p->ID) == true ? get_the_post_thumbnail_url($p->ID) : '';
             $last_changed = $p->post_modified;
@@ -236,7 +261,7 @@ class MSSL_Ajax
 
         }
 
-        $this->return_json($items);
+        $this->return_json($this->sortItemsByStatus($items));
 
     }
 
@@ -246,6 +271,22 @@ class MSSL_Ajax
     private function return_json($response): void
     {
         wp_die(json_encode($response, JSON_THROW_ON_ERROR));
+    }
+
+    private function sortItemsByStatus($items): array
+    {
+        $checkedItems = [];
+        $uncheckedItems = [];
+
+        foreach ($items as $item) {
+            if ($item['status'] === CheckStatus::CHECKED->toString()) {
+                $checkedItems[] = $item;
+            } else {
+                $uncheckedItems[] = $item;
+            }
+        }
+
+        return array_merge($uncheckedItems, $checkedItems);
     }
 
 }

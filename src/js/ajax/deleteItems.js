@@ -3,26 +3,32 @@
 const {renderShoppingList} = require("../view/renderShoppingList");
 const {renderInfoMessage} = require("../view/renderInfoMessage");
 
-const initDeleteItem = () => {
+const initDeleteItems = () => {
 
-    jQuery('body').on('click', '.delete-item', function (e) {
+    const deleteButton = jQuery('.delete-group img');
+    deleteButton.on('click', function (e) {
         e.preventDefault();
-        const item = jQuery(this).attr('data-src');
-        deleteItem(item);
+        deleteItems(getCheckedItems());
     });
 }
 
-const deleteItem = id => {
+const getCheckedItems = () => {
+    const items = [];
+    jQuery('.shopping-list-item.checked').each(function () {
+        items.push(jQuery(this).attr('data-src'));
+    });
+    return items;
+}
+const deleteItems = items => {
     jQuery.ajax({
         url: ajax.url, method: 'POST', dataType: 'json', data: {
-            action: 'MSSL_delete_item',
-            item: id,
+            action: 'MSSL_delete_items',
+            items: items,
         }, beforeSend: function () {
             // Show loader or loading state if needed
         }, success: function (data) {
-
             renderInfoMessage(data.message);
-            if(data.status === 'success') {
+            if (data.status === 'success') {
                 renderShoppingList();
             }
         }, complete: function () {
@@ -32,6 +38,6 @@ const deleteItem = id => {
 }
 
 module.exports = {
-    initDeleteItem
+    initDeleteItems
 }
 

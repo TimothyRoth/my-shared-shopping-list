@@ -2,7 +2,6 @@
 
 const {renderShoppingList} = require("../view/renderShoppingList");
 const {renderInfoMessage} = require("../view/renderInfoMessage");
-const {inputLimiter} = require("../lib/inputLimiter");
 
 const initAddItem = () => {
     const addItemButton = jQuery('#add-item-button');

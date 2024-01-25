@@ -11,6 +11,7 @@
       overflow-y: scroll
       width: 100%
       border-radius: 20px
+      background: #3D3D3D
 
       &.show
         transition: all 0.3s ease-in-out
@@ -22,10 +23,10 @@
         box-shadow: $box-shadow-light
         padding: 0
         margin: 0
-        background: $tertiary-color
+        border-radius: 2px solid $tertiary-color
 
         li
-          color: $primary-color
+          color: $tertiary-color
           padding: 10px 20px
           font-size: 1rem
           display: flex
@@ -35,10 +36,11 @@
           transition: all 0.3s ease-in-out
 
           &:hover
-            background: rgba($primary-color, 0.3)
+            transition: all 0.3s ease-in-out
+            background: #4F4F4F
 
           &:not(&:first-of-type)
-            border-top: 2px solid $primary-color
+            border-top: 2px solid $tertiary-color
 
           .delete-article-from-list
             position: relative
