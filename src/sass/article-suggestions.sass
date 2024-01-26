@@ -1,0 +1,50 @@
+.MSSL
+  .mssl-wrapper
+    .article-suggestion-wrapper
+      position: absolute
+      left: 0
+      top: 70px
+      opacity: 0
+      z-index: -1
+      transition: all 0.3s ease-in-out
+      max-height: 250px
+      overflow-y: scroll
+      width: 100%
+      border-radius: 20px
+      background: #3D3D3D
+
+      &.show
+        transition: all 0.3s ease-in-out
+        opacity: 1
+        z-index: 1
+
+      .article-suggestions
+        list-style: none
+        box-shadow: $box-shadow-light
+        padding: 0
+        margin: 0
+        border-radius: 2px solid $tertiary-color
+
+        li
+          color: $tertiary-color
+          padding: 10px 20px
+          font-size: 1rem
+          display: flex
+          justify-content: space-between
+          font-weight: 500
+          cursor: pointer
+          transition: all 0.3s ease-in-out
+
+          &:hover
+            transition: all 0.3s ease-in-out
+            background: #4F4F4F
+
+          &:not(&:first-of-type)
+            border-top: 2px solid $tertiary-color
+
+          .delete-article-from-list
+            position: relative
+            z-index: 2
+            width: 15px
+            height: auto
+
