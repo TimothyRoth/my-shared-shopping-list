@@ -8,6 +8,7 @@ const initDeleteItems = () => {
   deleteButton.on("click", function (e) {
     e.preventDefault();
     deleteItems(getCheckedItems());
+    jQuery(this).removeClass("show");
   });
 };
 
