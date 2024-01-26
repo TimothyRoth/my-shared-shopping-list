@@ -12,9 +12,10 @@ $post_type_args = [
 <div class="mssl-wrapper">
 
     <div class="app-menu">
-        <div class="delete-group"><img src="<?= MSSL_PLUGIN_URI ?>/assets/images/icons/delete-item.svg"></div>
         <div class="refresh-application"><img src="<?= MSSL_PLUGIN_URI ?>/assets/images/icons/update-arrows.svg"></div>
     </div>
+
+    <div class="delete-group"><img src="<?= MSSL_PLUGIN_URI ?>/assets/images/icons/delete-item.svg"></div>
     
     <div class="add-item-row">
         <input type="text" id="add-item" name="add-item" placeholder="Artikel hinzufügen">

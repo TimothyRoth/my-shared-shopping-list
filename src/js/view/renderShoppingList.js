@@ -1,38 +1,42 @@
 const renderShoppingList = () => {
+  const shoppingListContainer = jQuery(".shopping-list");
 
-    const shoppingListContainer = jQuery('.shopping-list');
+  jQuery.ajax({
+    url: ajax.url,
+    method: "POST",
+    dataType: "json",
+    data: {
+      action: "MSSL_render_shopping_list",
+    },
+    beforeSend: function () {
+      // Show loader or loading state if needed
+    },
+    success: function (data) {
+      shoppingListContainer.html(shoppingListView(data));
+    },
+    complete: function () {
+      // Hide loader or loading state if needed
+    },
+  });
+};
 
-    jQuery.ajax({
-        url: ajax.url, method: 'POST', dataType: 'json', data: {
-            action: 'MSSL_render_shopping_list',
-        }, beforeSend: function () {
-            // Show loader or loading state if needed
-        }, success: function (data) {
-            shoppingListContainer.html(shoppingListView(data));
-        }, complete: function () {
-            // Hide loader or loading state if needed
-        }
-    });
-}
+const shoppingListView = (data) => {
+  const pluginDirectory = plugin_settings.plugin_directory;
+  let html = "";
 
-const shoppingListView = data => {
-    const pluginDirectory = plugin_settings.plugin_directory;
-    let html = "";
+  for (let i = 0; i < data.length; i++) {
+    const currentStatus = data[i].status;
+    const deleteGroupButton = jQuery(".delete-group");
 
-    for (let i = 0; i < data.length; i++) {
+    deleteGroupButton.removeClass("show");
+    if (currentStatus === "checked") deleteGroupButton.addClass("show");
 
-        const currentStatus = data[i].status;
-        const deleteGroupButton = jQuery('.delete-group img')
+    let checkItemImage = `<img src="${pluginDirectory}/assets/images/icons/unchecked-item.svg">`;
 
-        deleteGroupButton.removeClass('show')
-        if (currentStatus === 'checked') deleteGroupButton.addClass('show');
+    if (currentStatus === "checked")
+      checkItemImage = `<img src="${pluginDirectory}/assets/images/icons/checked-item.svg">`;
 
-        let checkItemImage = `<img src="${pluginDirectory}/assets/images/icons/unchecked-item.svg">`;
-
-        if (currentStatus === 'checked')
-            checkItemImage = `<img src="${pluginDirectory}/assets/images/icons/checked-item.svg">`;
-
-        html += `
+    html += `
             <div class="shopping-list-item ${currentStatus}" data-src="${data[i].id}">
             <div data-src="${data[i].id}" class="check-item">${checkItemImage}</div>
                 <h3 class="show-popup">${data[i].title}<span class="short-description">${data[i].description}</span></h3>
@@ -53,11 +57,10 @@ const shoppingListView = data => {
                 <div data-src="${data[i].id}" class="delete-item"><img src="${pluginDirectory}/assets/images/icons/delete-item.svg"></div>
             </div>
         `;
-    }
-    return html;
-}
+  }
+  return html;
+};
 
 module.exports = {
-    renderShoppingList
-}
-
+  renderShoppingList,
+};

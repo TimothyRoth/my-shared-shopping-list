@@ -54,7 +54,7 @@ class MSSL_Ajax
         };
 
         $status_name = match ($toggle_status) {
-            'unchecked' => '"steht aus"',
+            'unchecked' => '"ausstehend"',
             'checked' => '"erledigt"',
         };
 
