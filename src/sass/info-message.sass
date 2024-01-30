@@ -19,9 +19,10 @@
     transform: translateX(-50%)
     position: fixed
     bottom: 70px
-    z-index: 3
+    z-index: -1
     opacity: 0
     transition: all 0.3s ease-in-out
     &.show-message
       transition: all 0.3s ease-in-out
       opacity: 1
+      z-index: 4
