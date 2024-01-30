@@ -16,6 +16,8 @@ const {initShowMetaData} = require("./functions/showMetaData");
 const {initUpdateTitle} = require("./ajax/updateTitle");
 const {initLoadArticleSuggestions} = require("./ajax/loadArticleSuggestions");
 const {initReloadApplication} = require("./ajax/reloadApplication");
+const {initOpenSidebar} = require("./functions/openSidebar");
+const {initLoadRecipes} = require("./ajax/loadRecipes");
 
 
 /*
@@ -36,4 +38,6 @@ jQuery(document).ready(function () {
     initLoadArticleSuggestions();
     initDeleteArticle();
     initReloadApplication();
+    initOpenSidebar();
+    initLoadRecipes();
 })
